@@ -2,13 +2,25 @@
 
 <cite>
 **Referenced Files in This Document**   
+- [Button.tsx](file://src/components/ui/Button.tsx)
+- [PaperCard.tsx](file://src/components/ui/PaperCard.tsx)
+- [SectionHeading.tsx](file://src/components/ui/SectionHeading.tsx)
+- [globals.css](file://src/app/globals.css)
+- [utils.ts](file://src/lib/utils.ts)
 - [ui-guidelines.md](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md)
 - [design-system.md](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md)
 - [color-palette.md](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\color-palette.md)
 - [animation-guidelines.md](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md)
-- [README.md](file://A-Little-World-For-You-Design-Asset-Pack\README.md)
-- [story-overview.md](file://A-Little-World-For-You-Design-Asset-Pack\STORY\story-overview.md)
 </cite>
+
+## Update Summary
+**Changes Made**   
+- Added detailed documentation for the new Button, PaperCard, and SectionHeading components
+- Updated component architecture section with actual implementation details
+- Enhanced watercolor aesthetic application with specific CSS implementations
+- Added practical React component patterns based on the new component library
+- Updated accessibility requirements with specific focus management and ARIA attributes
+- Included responsive behavior patterns from the actual codebase
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -23,13 +35,13 @@
 10. [Appendices](#appendices)
 
 ## Introduction
-This document defines the UI component guidelines for a romantic, intimate single-page experience. The design system emphasizes a gentle watercolor storybook aesthetic with warm paper-like surfaces, soft edges, and calm motion. The goal is to create buttons, cards, modals, and navigation components that feel handmade, sincere, and accessible, while supporting mobile-first responsive behavior and keyboard/screen reader interactions.
+This document defines the UI component guidelines for a romantic, intimate single-page experience built with a new component library featuring Button, PaperCard, and SectionHeading components. The design system emphasizes a gentle watercolor storybook aesthetic with warm paper-like surfaces, soft edges, and calm motion. The goal is to create buttons, cards, modals, and navigation components that feel handmade, sincere, and accessible, while supporting mobile-first responsive behavior and keyboard/screen reader interactions.
 
 The overall emotional arc guides how components should behave: curiosity, sincerity, recognition, warmth, commitment, and gentle closure. UI elements must never pressure the recipient; they should remain readable without animation and support reduced-motion preferences.
 
 **Section sources**
-- [README.md:5-10](file://A-Little-World-For-You-Design-Asset-Pack\README.md#L5-L10)
-- [story-overview.md:6-19](file://A-Little-World-For-You-Design-Asset-Pack\STORY\story-overview.md#L6-L19)
+- [ui-guidelines.md:3-12](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L3-L12)
+- [design-system.md:3-5](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L3-L5)
 
 ## Project Structure
 The design asset pack organizes guidance into clear areas:
@@ -64,193 +76,283 @@ Assets --> ReferenceBoards["UI Reference Boards"]
 - [README.md:12-17](file://A-Little-World-For-You-Design-Asset-Pack\README.md#L12-L17)
 
 ## Core Components
-This section establishes reusable UI building blocks aligned with the design system. Each component follows the watercolor aesthetic, accessibility rules, and responsive patterns defined by the project.
+This section establishes the three core reusable UI building blocks aligned with the design system. Each component follows the watercolor aesthetic, accessibility rules, and responsive patterns defined by the project.
 
-### Buttons
-- Shape: pill or softly rounded corners.
-- Surface: rose accent on cream/paper backgrounds; deep rose text/accent on light surfaces.
-- States: default, hover, focus, active, disabled.
-- Focus: visible focus ring; ensure sufficient contrast.
-- Size: minimum comfortable tap target around 44px.
-- Behavior: one primary action per section; avoid auto-play audio; do not force user tasks.
+### Button Component
+The Button component provides three variants (primary, secondary, quiet) with two sizes (md, lg), implementing the watercolor aesthetic through soft rounded corners, rose accents, and gentle shadows.
 
-Implementation notes:
-- Use semantic `<button>` elements.
-- Provide clear labels and aria attributes where needed.
-- Keep animations subtle (e.g., gentle scale or fade).
-- Respect `prefers-reduced-motion`.
+**Key Features:**
+- **Variants**: Primary (rose background), Secondary (paper surface with border), Quiet (transparent underline)
+- **Sizes**: Medium (min-height 44px) and Large (min-height 52px) for comfortable tap targets
+- **Accessibility**: Semantic `<button>` element with visible focus ring using `focus-visible`
+- **Interactions**: Gentle hover effects with subtle lift (`-translate-y-0.5`) and smooth transitions
+- **States**: Default, hover, focus, active, disabled with appropriate visual feedback
 
-**Section sources**
-- [design-system.md:28-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L28-L33)
-- [design-system.md:42-48](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L42-L48)
-- [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
+**Implementation Details:**
+- Uses Tailwind classes with custom color tokens (`bg-rose-deep`, `text-paper`, `shadow-paper`)
+- Implements pill shape with `rounded-full` for soft, organic appearance
+- Focus styling uses `focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-rose-deep`
+- Transitions applied to transform, background-color, color, and box-shadow properties
+- Disabled state includes `cursor-not-allowed` and reduced opacity
 
-### Cards
-- Shape: rounded 20–28px.
-- Surface: paper-like border, subtle shadow, slightly imperfect decorative edges using CSS.
-- Content: serif headings, readable body copy, handwritten accents only for short notes.
-- States: default, hover, focus, selected (if applicable), disabled.
-- Interactions: gentle reveal via opacity and transform; avoid layout-heavy animations.
-
-Implementation notes:
-- Use semantic containers (`<article>`, `<section>`) when appropriate.
-- Maintain comfortable reading width (620–720px) within card content.
-- Ensure alt text for meaningful images; empty alt for decoration.
+**Usage Example:**
+```tsx
+<Button variant="primary" size="lg" onClick={handleClick}>
+  Open Gift
+</Button>
+```
 
 **Section sources**
-- [design-system.md:22-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L22-L33)
-- [ui-guidelines.md:14-19](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L14-L19)
+- [Button.tsx:1-36](file://src/components/ui/Button.tsx#L1-L36)
+- [design-system.md:30-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L30-L33)
+- [ui-guidelines.md:49-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L49-L55)
 
-### Modals and Lightboxes
-- Purpose: accessible lightbox for photo gallery and optional confirmations.
-- Behavior: fade and scale from 0.98→1; close button present; keyboard support.
-- Accessibility: trap focus inside modal; return focus to trigger on close; announce open/close to screen readers.
-- Motion: gentle transitions; respect reduced-motion.
+### PaperCard Component
+The PaperCard component creates paper-like surfaces used throughout the interface for letters, promise cards, and scrapbook notes. It implements the watercolor aesthetic through texture, borders, and shadows.
 
-Implementation notes:
-- Use native dialog or ARIA modal patterns.
-- Provide keyboard shortcuts (Escape to close).
-- Avoid forcing completion; allow dismissal at any time.
+**Key Features:**
+- **Texture**: SVG-based paper grain overlay using `feTurbulence` filter for authentic paper feel
+- **Surface**: Paper-colored background with subtle border and shadow elevation
+- **Shape**: Rounded corners using CSS custom property `--radius-paper` (1.75rem)
+- **Accessibility**: Semantic div container with proper ARIA attributes when needed
+- **Composition**: Flexible children container supporting various content types
 
-**Section sources**
-- [ui-guidelines.md:28-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L28-L33)
-- [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
-- [animation-guidelines.md:21-28](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L21-L28)
+**Implementation Details:**
+- Applies `.paper-texture` class which adds SVG noise overlay at 5.5% opacity
+- Uses CSS custom properties for consistent spacing and shadows
+- Shadow effect combines elevation shadow with inset white highlight for depth
+- Border uses ink color at 8% opacity for subtle definition
 
-### Navigation and Progress Indicators
-- Style: minimal, non-dominant progress indicator if used.
-- Behavior: smooth scroll between chapters; maintain readability without animation.
-- Accessibility: landmarks, semantic headings, keyboard-operable interactions.
-
-Implementation notes:
-- Use semantic navigation elements (`<nav>`, `<ul>`, `<li>`).
-- Provide skip links and visible focus states.
-- Keep progress indicators subtle and optional.
-
-**Section sources**
-- [ui-guidelines.md:3-5](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L3-L5)
-- [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
-
-### Gallery Items (Polaroids)
-- Shape: white border, slight rotation, soft shadow.
-- Interaction: tiny rotation on hover/tap; opens accessible lightbox.
-- Content: captions editable in data file; placeholders until real photos are added.
-
-Implementation notes:
-- Use image elements with descriptive alt text.
-- Provide caption text below or within accessible structure.
-- Ensure lightbox supports keyboard navigation and screen readers.
+**Usage Example:**
+```tsx
+<PaperCard className="p-8">
+  <h3>Promise Card</h3>
+  <p>I will listen before explaining.</p>
+</PaperCard>
+```
 
 **Section sources**
-- [design-system.md:32-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L32-L33)
-- [ui-guidelines.md:28-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L28-L33)
+- [PaperCard.tsx:1-21](file://src/components/ui/PaperCard.tsx#L1-L21)
+- [globals.css:61-78](file://src/app/globals.css#L61-L78)
+- [design-system.md:30-35](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L30-L35)
+
+### SectionHeading Component
+The SectionHeading component provides structured heading layouts with optional eyebrow text and lead paragraphs, following the watercolor aesthetic through typography and spacing.
+
+**Key Features:**
+- **Structure**: Header element containing eyebrow, title, and optional lead paragraph
+- **Typography**: Display font for headings, body font for lead text, handwritten accent for eyebrow
+- **Alignment**: Center or left alignment options with responsive sizing
+- **Accessibility**: Proper semantic structure with heading hierarchy and ID support
+- **Styling**: Rose-deep eyebrow text, responsive heading sizes, muted lead text
+
+**Implementation Details:**
+- Eyebrow text uses uppercase tracking with rose-deep color for section identification
+- Main heading uses display font with responsive sizing (1.75rem to 2.6rem)
+- Lead paragraph limited to 38rem max-width for optimal reading comfort
+- Supports anchor links through optional ID prop for navigation
+
+**Usage Example:**
+```tsx
+<SectionHeading 
+  eyebrow="Chapter Three"
+  title="What I Didn't Realize"
+  lead="Three illustrated story beats showing my growth."
+  align="center"
+/>
+```
+
+**Section sources**
+- [SectionHeading.tsx:1-52](file://src/components/ui/SectionHeading.tsx#L1-L52)
+- [design-system.md:22-28](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L22-L28)
 
 ## Architecture Overview
-The UI architecture centers on a small set of reusable components built on the design tokens and motion principles. Components compose into chapter-based sections following a vertical narrative flow.
+The UI architecture centers on three core components built on shared design tokens and global styles. Components compose into chapter-based sections following a vertical narrative flow.
 
 ```mermaid
 graph TB
 Tokens["Design Tokens<br/>Colors, Typography, Shapes"]
-Base["Base Styles<br/>Paper Surfaces, Shadows, Edges"]
-Button["Button"]
-Card["Card"]
-Modal["Modal/Lightbox"]
-Nav["Navigation/Progress"]
-GalleryItem["Gallery Item (Polaroid)"]
-Section["Chapter Sections"]
-Tokens --> Base
-Base --> Button
-Base --> Card
-Base --> Modal
-Base --> Nav
-Base --> GalleryItem
-Button --> Section
-Card --> Section
-Modal --> Section
-Nav --> Section
-GalleryItem --> Section
+GlobalStyles["Global Styles<br/>Paper Textures, Wash Effects"]
+Utils["Utility Functions<br/>cn(), clamp()"]
+Button["Button Component"]
+PaperCard["PaperCard Component"]
+SectionHeading["SectionHeading Component"]
+ChapterSections["Chapter Sections"]
+Tokens --> GlobalStyles
+Tokens --> Utils
+GlobalStyles --> Button
+GlobalStyles --> PaperCard
+GlobalStyles --> SectionHeading
+Utils --> Button
+Utils --> PaperCard
+Utils --> SectionHeading
+Button --> ChapterSections
+PaperCard --> ChapterSections
+SectionHeading --> ChapterSections
 ```
 
 **Diagram sources**
-- [design-system.md:6-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L6-L33)
-- [ui-guidelines.md:3-5](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L3-L5)
+- [Button.tsx:1-36](file://src/components/ui/Button.tsx#L1-L36)
+- [PaperCard.tsx:1-21](file://src/components/ui/PaperCard.tsx#L1-L21)
+- [SectionHeading.tsx:1-52](file://src/components/ui/SectionHeading.tsx#L1-L52)
+- [globals.css:1-141](file://src/app/globals.css#L1-L141)
+- [utils.ts:1-27](file://src/lib/utils.ts#L1-L27)
 
 ## Detailed Component Analysis
 
 ### Watercolor Aesthetic Application
-- Soft edges: use rounded corners for cards and buttons; avoid sharp angles.
-- Gentle shadows: subtle elevation for cards and polaroids; keep shadows soft and low-opacity.
-- Paper-like textures: apply paper surface colors and borders; use CSS to simulate slightly imperfect decorative edges sparingly.
-- Color balance: alternate warm paper, pale sky, and botanical tones to create visual rhythm; avoid making every section pink.
+The watercolor aesthetic is implemented through several key techniques across all components:
 
-Implementation notes:
-- Apply tokenized colors consistently across components.
-- Limit decorative watercolor elements to enhance intimacy without clutter.
-- Ensure text remains readable against varied backgrounds.
+**Soft Edges and Organic Shapes:**
+- Buttons use `rounded-full` for pill shapes
+- Cards use CSS custom property `--radius-paper` (1.75rem) for consistent rounding
+- Avoid sharp angles throughout the interface
+
+**Gentle Shadows and Elevation:**
+- Custom shadow token `--shadow-paper` combines elevation with inset highlights
+- Subtle shadow values using ink color at controlled opacity
+- Hover states include gentle lift transforms (`-translate-y-0.5`)
+
+**Paper-like Textures:**
+- SVG-based paper grain overlay using `feTurbulence` filter
+- Low opacity (5.5%) blend mode for authentic paper feel
+- Inset white highlights for depth and dimension
+
+**Color Balance and Wash Effects:**
+- Radial gradient washes behind illustrations and headings
+- Alternating warm paper, pale sky, and botanical tones
+- Controlled rose usage (5% of palette) to avoid overwhelming pink
 
 **Section sources**
-- [design-system.md:6-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L6-L33)
-- [color-palette.md:14-22](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\color-palette.md#L14-L22)
+- [globals.css:21-26](file://src/app/globals.css#L21-L26)
+- [globals.css:61-106](file://src/app/globals.css#L61-L106)
+- [design-system.md:6-20](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L6-L20)
 
 ### Component States and Interactions
-- Default: calm, readable, inviting.
-- Hover: gentle scale/fade; avoid rapid bouncing or flashing.
-- Focus: visible focus ring; ensure high contrast.
-- Active: subtle press effect; maintain clarity.
-- Disabled: muted state; clearly indicate non-interactivity.
-- Reduced motion: disable ambient loops and simplify transitions.
+All components follow consistent interaction patterns aligned with the watercolor aesthetic:
 
-Implementation notes:
-- Use transform and opacity for animations; avoid layout-heavy properties.
-- Keep transition durations within 350–700ms for most interactions.
-- Respect `prefers-reduced-motion` for all interactive elements.
+**Default State:**
+- Calm, readable, inviting presentation
+- Appropriate contrast ratios meeting WCAG AA standards
+- Clear visual hierarchy with proper typography
+
+**Hover State:**
+- Gentle scale/fade transitions (350-700ms duration)
+- Subtle lift effects for interactive elements
+- Color transitions maintaining brand consistency
+
+**Focus State:**
+- Visible focus ring using `focus-visible` pseudo-class
+- High contrast outline (rose-deep color)
+- Proper outline offset for clarity
+
+**Active State:**
+- Subtle press effects maintaining readability
+- Transform animations for tactile feedback
+- Smooth transition back to default state
+
+**Disabled State:**
+- Muted appearance with reduced opacity
+- Cursor not allowed for non-interactive elements
+- Clear indication of non-interactivity
+
+**Reduced Motion Support:**
+- All animations respect `prefers-reduced-motion`
+- Simplified transitions for accessibility
+- No essential functionality dependent on animations
 
 **Section sources**
+- [Button.tsx:11-31](file://src/components/ui/Button.tsx#L11-L31)
+- [globals.css:55-59](file://src/app/globals.css#L55-L59)
+- [globals.css:128-141](file://src/app/globals.css#L128-L141)
 - [animation-guidelines.md:5-11](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L5-L11)
-- [animation-guidelines.md:21-28](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L21-L28)
 
 ### Responsive Behavior Patterns
-- Mobile-first layout; main content max width 1080–1160px.
-- Comfortable reading width 620–720px.
-- Generous spacing: 88–120px desktop, 56–76px mobile.
-- Test at 360px, 390px, 768px, 1024px, and wide desktop.
-- Support tap targets around 44px; do not rely on hover.
+Components implement mobile-first responsive design with careful attention to touch interactions:
 
-Implementation notes:
-- Use fluid typography and spacing scales.
-- Ensure gallery items stack gracefully on small screens.
-- Keep modals accessible on mobile; provide easy dismiss actions.
+**Mobile-First Layout:**
+- Base styles optimized for small screens
+- Fluid typography scaling from 1.75rem to 2.6rem
+- Touch-friendly minimum tap targets (44px+)
+
+**Breakpoint Strategy:**
+- Small screens: Single column layout, compact spacing
+- Tablet (768px+): Improved readability, larger text
+- Desktop: Maximum content width constraints, enhanced spacing
+
+**Touch and Mouse Interactions:**
+- Hover effects enhanced but not required for functionality
+- Tap targets sized appropriately for fingers
+- Gesture-friendly spacing between interactive elements
+
+**Content Constraints:**
+- Maximum reading width of 38rem for lead paragraphs
+- Comfortable line heights for extended reading
+- Proper margins and padding for breathing room
 
 **Section sources**
-- [design-system.md:35-40](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L35-L40)
-- [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
+- [SectionHeading.tsx:22-48](file://src/components/ui/SectionHeading.tsx#L22-L48)
+- [design-system.md:37-42](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L37-L42)
+- [ui-guidelines.md:49-57](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L49-L57)
 
 ### Practical React Component Patterns
-Reusable React components should encapsulate:
-- Props for label, variant, size, disabled, and accessibility attributes.
-- Internal state for focus management and modal visibility.
-- Animation hooks respecting reduced motion.
-- Semantic HTML output with proper ARIA roles and labels.
+The new component library demonstrates best practices for reusable React components:
 
-Recommended patterns:
-- Button: `<Button variant="primary" onClick={...} aria-label={...}>`
-- Card: `<Card as="article">...</Card>`
-- Modal: `<Modal isOpen={isOpen} onClose={handleClose} title="...">`
-- GalleryItem: `<GalleryItem src="..." alt="..." caption="...">`
-- Navigation: `<Nav items={...} activeIndex={...} />`
+**Component Structure:**
+- TypeScript interfaces for props validation
+- Default prop values for sensible defaults
+- Spread operator for additional HTML attributes
+- Conditional rendering for optional content
 
-Accessibility checklist:
-- Keyboard operable: Tab order logical; Enter/Space triggers actions; Escape closes modals.
-- Screen reader support: Announce dynamic changes; provide descriptive labels; use landmarks.
-- Visible focus: Custom focus rings styled with high contrast.
-- Reduced motion: Disable nonessential animations when requested.
+**Styling Approach:**
+- Utility-first CSS with Tailwind classes
+- CSS custom properties for design tokens
+- Class composition with utility function
+- Consistent naming conventions
 
-[No code snippets included; implement according to these patterns.]
+**Accessibility Implementation:**
+- Semantic HTML elements as base
+- Proper ARIA attributes when needed
+- Keyboard navigation support
+- Screen reader compatibility
+
+**Recommended Patterns:**
+```tsx
+// Button usage
+<Button variant="primary" size="lg" onClick={handleSubmit} aria-label="Submit form">
+  Submit
+</Button>
+
+// PaperCard usage  
+<PaperCard className="mb-8 p-6">
+  <h3>Card Title</h3>
+  <p>Card content goes here</p>
+</PaperCard>
+
+// SectionHeading usage
+<SectionHeading 
+  eyebrow="Chapter One"
+  title="The Beginning"
+  lead="An introduction to our story."
+  align="center"
+  id="chapter-one"
+/>
+```
+
+**Accessibility Checklist:**
+- Keyboard operable with logical Tab order
+- Enter/Space triggers actions appropriately
+- Escape closes modals and dialogs
+- Screen reader announcements for dynamic changes
+- Descriptive labels and landmarks
+- High contrast focus indicators
+- Reduced motion support
 
 **Section sources**
-- [design-system.md:42-48](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L42-L48)
-- [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
-- [animation-guidelines.md:21-28](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L21-L28)
+- [Button.tsx:6-9](file://src/components/ui/Button.tsx#L6-L9)
+- [PaperCard.tsx:4-8](file://src/components/ui/PaperCard.tsx#L4-L8)
+- [SectionHeading.tsx:3-10](file://src/components/ui/SectionHeading.tsx#L3-L10)
+- [ui-guidelines.md:49-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L49-L55)
 
 ### Sequence: Envelope Open and Letter Reveal
 ```mermaid
@@ -289,71 +391,147 @@ ReturnFocus --> End(["Interaction Complete"])
 - [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
 
 ## Dependency Analysis
-Components depend on shared design tokens and motion principles. Coupling is minimized by keeping base styles separate from component logic.
+Components depend on shared design tokens, global styles, and utility functions. Coupling is minimized by keeping base styles separate from component logic.
 
 ```mermaid
 graph LR
-Tokens["Design Tokens"] --> BaseStyles["Base Styles"]
-BaseStyles --> ButtonComp["Button"]
-BaseStyles --> CardComp["Card"]
-BaseStyles --> ModalComp["Modal"]
-BaseStyles --> NavComp["Navigation"]
-BaseStyles --> GalleryComp["Gallery Item"]
-Motion["Motion Principles"] --> ButtonComp
-Motion --> ModalComp
-Motion --> GalleryComp
+Tokens["Design Tokens<br/>(CSS Variables)"] --> GlobalStyles["Global Styles<br/>(globals.css)"]
+GlobalStyles --> ButtonComp["Button Component"]
+GlobalStyles --> PaperCardComp["PaperCard Component"]
+GlobalStyles --> SectionHeadingComp["SectionHeading Component"]
+Utils["Utility Functions<br/>(utils.ts)"] --> ButtonComp
+Utils --> PaperCardComp
+Utils --> SectionHeadingComp
+Motion["Motion Principles<br/>(Animation Guidelines)"] --> ButtonComp
+Motion --> PaperCardComp
+Motion --> SectionHeadingComp
 ```
 
 **Diagram sources**
-- [design-system.md:6-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L6-L33)
-- [animation-guidelines.md:5-11](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L5-L11)
+- [globals.css:9-32](file://src/app/globals.css#L9-L32)
+- [utils.ts:1-27](file://src/lib/utils.ts#L1-L27)
+- [Button.tsx:1-36](file://src/components/ui/Button.tsx#L1-L36)
+- [PaperCard.tsx:1-21](file://src/components/ui/PaperCard.tsx#L1-L21)
+- [SectionHeading.tsx:1-52](file://src/components/ui/SectionHeading.tsx#L1-L52)
 
 **Section sources**
-- [design-system.md:6-33](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L6-L33)
+- [globals.css:1-141](file://src/app/globals.css#L1-L141)
+- [utils.ts:1-27](file://src/lib/utils.ts#L1-L27)
 - [animation-guidelines.md:5-11](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L5-L11)
 
 ## Performance Considerations
-- Prefer transform and opacity for animations; avoid layout-heavy properties.
-- Use viewport-triggered reveals once per section; avoid redundant animations.
-- Limit simultaneous particles and ambient loops; stop or simplify on mobile.
-- Respect `prefers-reduced-motion`; disable nonessential ambient animation.
-- Test on mid-range mobile devices; ensure smooth scrolling and touch interactions.
+The component library prioritizes performance through efficient implementation:
+
+**Animation Performance:**
+- Prefer transform and opacity for animations over layout-heavy properties
+- Use viewport-triggered reveals once per section
+- Limit simultaneous particles and ambient loops
+- Respect `prefers-reduced-motion` for all animations
+
+**CSS Optimization:**
+- Minimal CSS file size with focused selectors
+- Efficient SVG filters for paper textures
+- Optimized gradient calculations with CSS custom properties
+- Reduced animation durations for accessibility
+
+**JavaScript Efficiency:**
+- Simple utility functions without heavy dependencies
+- No unnecessary re-renders in React components
+- Efficient event handling and state management
+- Proper cleanup of event listeners and timers
+
+**Mobile Performance:**
+- Test on mid-range mobile devices
+- Optimize image loading and caching
+- Minimize bundle size by avoiding unnecessary libraries
+- Ensure smooth scrolling and touch interactions
 
 **Section sources**
-- [animation-guidelines.md:21-28](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L21-L28)
+- [animation-guidelines.md:21-29](file://A-Little-World-For-You-Design-Asset-Pack\ANIMATIONS\animation-guidelines.md#L21-L29)
+- [globals.css:128-141](file://src/app/globals.css#L128-L141)
 
 ## Troubleshooting Guide
-Common issues and resolutions:
-- Missing focus ring: ensure custom focus styles have high contrast and are applied to interactive elements.
-- Screen reader announcements missing: add ARIA live regions or roles where dynamic content updates occur.
-- Excessive motion causing discomfort: honor `prefers-reduced-motion`; reduce amplitude and frequency.
-- Tap targets too small: increase to at least 44px; avoid hover-only interactions.
-- Images lacking alt text: provide meaningful alt descriptions; use empty alt for decorative images.
+Common issues and resolutions for the UI component library:
+
+**Missing Focus Ring:**
+- Ensure `focus-visible` is supported in target browsers
+- Verify focus styles are applied to interactive elements
+- Check that custom focus styles have high contrast
+- Test with keyboard navigation only
+
+**Screen Reader Issues:**
+- Add ARIA live regions for dynamic content updates
+- Provide descriptive labels for icon-only controls
+- Use semantic HTML elements appropriately
+- Test with multiple screen readers (NVDA, JAWS, VoiceOver)
+
+**Excessive Motion:**
+- Honor `prefers-reduced-motion` media query
+- Reduce animation amplitude and frequency
+- Disable nonessential ambient animations
+- Provide manual controls for motion preferences
+
+**Tap Target Problems:**
+- Increase interactive elements to minimum 44px
+- Remove hover-only interactions
+- Ensure adequate spacing between touch targets
+- Test with touch simulators and real devices
+
+**Image Accessibility:**
+- Provide meaningful alt descriptions for content images
+- Use empty alt attributes for decorative images
+- Implement lazy loading for below-fold images
+- Optimize image formats and sizes
 
 **Section sources**
-- [ui-guidelines.md:48-55](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L48-L55)
+- [ui-guidelines.md:49-57](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\ui-guidelines.md#L49-L57)
 
 ## Conclusion
-These UI component guidelines establish a cohesive, romantic, and accessible design system. By applying watercolor aesthetics through soft edges, gentle shadows, and paper-like textures, and by enforcing thoughtful interactions and responsive behavior, the interface will feel intimate and sincere. Prioritizing accessibility and reduced-motion support ensures inclusivity across devices and abilities.
-
-[No sources needed since this section summarizes without analyzing specific files]
+These UI component guidelines establish a cohesive, romantic, and accessible design system through the new Button, PaperCard, and SectionHeading components. By applying watercolor aesthetics through soft edges, gentle shadows, and paper-like textures, and by enforcing thoughtful interactions and responsive behavior, the interface feels intimate and sincere. The component library prioritizes accessibility and reduced-motion support, ensuring inclusivity across devices and abilities while maintaining the emotional tone of the romantic narrative.
 
 ## Appendices
 
 ### Color Usage Summary
-- Primary background: warm ivory.
-- Paper surface: off-white.
-- Accents: blush, rose, peach, sky blue, sage.
-- Text: ink and muted tones.
-- Balance: alternate warm paper, pale sky, and botanical tones; limit pink usage.
+- **Primary background**: Warm ivory `#FFF9F2`
+- **Paper surface**: Off-white `#FFFDF9`
+- **Accents**: Blush `#F7DCE2`, Rose `#D98FA0`, Peach `#F5C7AE`, Sky blue `#DCEAF2`, Sage `#C8D2BE`
+- **Text**: Ink `#59464A` and Muted `#7A6466`
+- **Balance**: 55% cream/paper, 20% blush, 10% peach, 10% sky/sage, 5% rose accents
 
 **Section sources**
 - [color-palette.md:1-22](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\color-palette.md#L1-L22)
 
 ### Typography Summary
-- Headings: serif fonts like Playfair Display or Cormorant Garamond.
-- Body: sans-serif fonts like Nunito or Quicksand.
-- Handwritten accents: Caveat or Pacifico, used sparingly.
+- **Headings**: Playfair Display serif font
+- **Body**: Nunito sans-serif font
+- **Handwritten accents**: Pacifico cursive font, used sparingly for signatures and notes
+- **Subset requirement**: Vietnamese subset for all fonts
+- **Loading**: Next.js font optimization with display swap
 
 **Section sources**
-- [design-system.md:22-27](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L22-L27)
+- [design-system.md:22-28](file://A-Little-World-For-You-Design-Asset-Pack\DESIGN\design-system.md#L22-L28)
+- [globals.css:28-32](file://src/app/globals.css#L28-L32)
+
+### Component API Reference
+
+**Button Props:**
+- `variant`: "primary" | "secondary" | "quiet"
+- `size`: "md" | "lg"
+- Standard button HTML attributes
+
+**PaperCard Props:**
+- Standard div HTML attributes
+- className for additional styling
+
+**SectionHeading Props:**
+- `eyebrow`: string (optional)
+- `title`: string (required)
+- `lead`: string (optional)
+- `align`: "left" | "center"
+- `className`: string (optional)
+- `id`: string (optional)
+
+**Section sources**
+- [Button.tsx:6-9](file://src/components/ui/Button.tsx#L6-L9)
+- [PaperCard.tsx:4-8](file://src/components/ui/PaperCard.tsx#L4-L8)
+- [SectionHeading.tsx:3-10](file://src/components/ui/SectionHeading.tsx#L3-L10)

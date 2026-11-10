@@ -17,7 +17,27 @@
 - [src/hooks/useDialog.ts](file://src/hooks/useDialog.ts)
 - [src/hooks/useReducedMotion.ts](file://src/hooks/useReducedMotion.ts)
 - [scripts/convert-memories.mjs](file://scripts/convert-memories.mjs)
+- [src/components/entrance/EnvelopeIntro.tsx](file://src/components/entrance/EnvelopeIntro.tsx)
+- [src/components/letter/LoveLetter.tsx](file://src/components/letter/LoveLetter.tsx)
+- [src/components/story/StoryTimeline.tsx](file://src/components/story/StoryTimeline.tsx)
+- [src/components/memories/MemoryGallery.tsx](file://src/components/memories/MemoryGallery.tsx)
+- [src/components/memories/MemoryLightbox.tsx](file://src/components/memories/MemoryLightbox.tsx)
+- [src/components/promises/PromiseCards.tsx](file://src/components/promises/PromiseCards.tsx)
+- [src/components/ending/HugSection.tsx](file://src/components/ending/HugSection.tsx)
+- [src/components/effects/FloatingPetals.tsx](file://src/components/effects/FloatingPetals.tsx)
+- [src/components/effects/HiddenHearts.tsx](file://src/components/effects/HiddenHearts.tsx)
+- [src/components/effects/FlowerGarden.tsx](file://src/components/effects/FlowerGarden.tsx)
+- [src/components/illustrations/Botanicals.tsx](file://src/components/illustrations/Botanicals.tsx)
+- [src/components/illustrations/Characters.tsx](file://src/components/illustrations/Characters.tsx)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Updated component hierarchy to reflect complete separation of concerns with dedicated directories for each chapter and feature
+- Added detailed documentation for new effect components (FloatingPetals, HiddenHearts, FlowerGarden)
+- Added comprehensive coverage of illustration components (Botanicals, Characters)
+- Enhanced MemoryGallery and MemoryLightbox component documentation
+- Updated architecture diagrams to show the complete component tree structure
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -42,7 +62,17 @@ The repository also includes a build-time script that converts owner-supplied ph
 ## Project Structure
 At a high level:
 - App shell and layout live under `src/app`.
-- Feature components are grouped by chapter or concern under `src/components`.
+- Feature components are grouped by chapter or concern under `src/components` with clear directory organization:
+  - `entrance/` - Opening envelope animation
+  - `letter/` - Love letter display
+  - `story/` - Story timeline
+  - `memories/` - Photo gallery and lightbox
+  - `promises/` - Commitment cards
+  - `ending/` - Closing hug interaction
+  - `effects/` - Ambient animations and interactive elements
+  - `illustrations/` - SVG-based decorative graphics
+  - `layout/` - Shared layout components
+  - `ui/` - Reusable UI primitives
 - Data lives under `src/data`, with typed models under `src/types`.
 - Shared logic is split between `src/lib` (utilities, asset paths, motion constants) and `src/hooks` (dialog behavior, reduced motion).
 - A Node script under `scripts` prepares image assets.
@@ -53,16 +83,31 @@ subgraph "App Shell"
 Layout["layout.tsx"]
 Page["page.tsx"]
 end
-subgraph "Components"
-Envelope["EnvelopeIntro.tsx"]
+subgraph "Chapter Components"
+Entrance["EnvelopeIntro.tsx"]
 Letter["LoveLetter.tsx"]
 Timeline["StoryTimeline.tsx"]
 Gallery["MemoryGallery.tsx"]
 Promises["PromiseCards.tsx"]
+Ending["HugSection.tsx"]
+end
+subgraph "Effect Components"
+Petals["FloatingPetals.tsx"]
+Hearts["HiddenHearts.tsx"]
 Garden["FlowerGarden.tsx"]
-Hug["HugSection.tsx"]
-Footer["SiteFooter.tsx"]
-Progress["ProgressIndicator.tsx"]
+end
+subgraph "Illustration Components"
+Botanicals["Botanicals.tsx"]
+Characters["Characters.tsx"]
+Scenes["Scenes.tsx"]
+end
+subgraph "Layout & UI"
+SectionWrapper["SectionWrapper.tsx"]
+ProgressIndicator["ProgressIndicator.tsx"]
+SiteFooter["SiteFooter.tsx"]
+Button["Button.tsx"]
+PaperCard["PaperCard.tsx"]
+SectionHeading["SectionHeading.tsx"]
 end
 subgraph "Data & Types"
 SiteContent["site-content.ts"]
@@ -70,49 +115,40 @@ Memories["memories.ts"]
 Interludes["interludes.ts"]
 Types["types/index.ts"]
 end
-subgraph "Shared"
-Utils["utils.ts"]
-Assets["assets.ts"]
-Motion["motion.ts"]
-DialogHook["useDialog.ts"]
-ReducedMotion["useReducedMotion.ts"]
-end
-Page --> Envelope
+Page --> Entrance
 Page --> Letter
 Page --> Timeline
 Page --> Gallery
 Page --> Promises
 Page --> Garden
-Page --> Hug
-Page --> Footer
-Page --> Progress
-Envelope --> SiteContent
-Letter --> SiteContent
-Timeline --> Interludes
-Gallery --> Memories
-Promises --> Interludes
-Garden --> Interludes
-Hug --> SiteContent
-Gallery --> Utils
-Gallery --> Assets
-Timeline --> Motion
-Garden --> Motion
-Hug --> Motion
-Lightbox["Lightbox (in MemoryGallery)"] --> DialogHook
-Lightbox --> ReducedMotion
+Page --> Ending
+Entrance --> Petals
+Entrance --> Hearts
+Entrance --> Characters
+Letter --> Botanicals
+Letter --> Hearts
+Timeline --> Scenes
+Timeline --> Hearts
+Gallery --> Botanicals
+Gallery --> Hearts
+Gallery --> MemoryLightbox
+Ending --> Botanicals
+Ending --> Characters
+Ending --> Petals
 ```
 
 **Diagram sources**
 - [src/app/page.tsx:1-52](file://src/app/page.tsx#L1-L52)
 - [src/app/layout.tsx:1-55](file://src/app/layout.tsx#L1-L55)
-- [src/data/site-content.ts:1-65](file://src/data/site-content.ts#L1-L65)
-- [src/data/memories.ts:1-59](file://src/data/memories.ts#L1-L59)
-- [src/data/interludes.ts:1-111](file://src/data/interludes.ts#L1-L111)
-- [src/lib/utils.ts:1-27](file://src/lib/utils.ts#L1-L27)
-- [src/lib/assets.ts:1-25](file://src/lib/assets.ts#L1-L25)
-- [src/lib/motion.ts:1-62](file://src/lib/motion.ts#L1-L62)
-- [src/hooks/useDialog.ts:1-98](file://src/hooks/useDialog.ts#L1-L98)
-- [src/hooks/useReducedMotion.ts:1-12](file://src/hooks/useReducedMotion.ts#L1-L12)
+- [src/components/entrance/EnvelopeIntro.tsx:1-182](file://src/components/entrance/EnvelopeIntro.tsx#L1-L182)
+- [src/components/letter/LoveLetter.tsx:1-99](file://src/components/letter/LoveLetter.tsx#L1-L99)
+- [src/components/story/StoryTimeline.tsx:1-88](file://src/components/story/StoryTimeline.tsx#L1-L88)
+- [src/components/memories/MemoryGallery.tsx:1-120](file://src/components/memories/MemoryGallery.tsx#L1-L120)
+- [src/components/effects/FloatingPetals.tsx:1-71](file://src/components/effects/FloatingPetals.tsx#L1-L71)
+- [src/components/effects/HiddenHearts.tsx:1-98](file://src/components/effects/HiddenHearts.tsx#L1-L98)
+- [src/components/effects/FlowerGarden.tsx:1-129](file://src/components/effects/FlowerGarden.tsx#L1-L129)
+- [src/components/illustrations/Botanicals.tsx:1-191](file://src/components/illustrations/Botanicals.tsx#L1-L191)
+- [src/components/illustrations/Characters.tsx:1-283](file://src/components/illustrations/Characters.tsx#L1-L283)
 
 **Section sources**
 - [src/app/page.tsx:1-52](file://src/app/page.tsx#L1-L52)
@@ -131,7 +167,7 @@ Lightbox --> ReducedMotion
   - `motion.ts` defines easing, durations, viewport triggers, and reusable variants for animations.
 - Hooks:
   - `useDialog.ts` implements accessible dialog behavior (focus trap, Escape to close, scroll lock).
-  - `useReducedMotion.ts` wraps Motion’s reduced-motion hook for accessibility.
+  - `useReducedMotion.ts` wraps Motion's reduced-motion hook for accessibility.
 
 **Section sources**
 - [src/app/layout.tsx:1-55](file://src/app/layout.tsx#L1-L55)
@@ -155,10 +191,12 @@ The application follows a unidirectional data flow:
 ```mermaid
 graph LR
 Data["Data Modules<br/>site-content.ts, memories.ts, interludes.ts"] --> Types["Types<br/>types/index.ts"]
-Data --> Components["Chapter Components<br/>Envelope, Letter, Timeline, Gallery, Promises, Garden, Hug"]
-Libs["Shared Libraries<br/>utils.ts, assets.ts, motion.ts"] --> Components
-Hooks["Hooks<br/>useDialog.ts, useReducedMotion.ts"] --> Components
-Page["Root Page<br/>page.tsx"] --> Components
+Data --> ChapterComponents["Chapter Components<br/>Entrance, Letter, Timeline, Gallery, Promises, Ending"]
+Effects["Effect Components<br/>FloatingPetals, HiddenHearts, FlowerGarden"] --> ChapterComponents
+Illustrations["Illustration Components<br/>Botanicals, Characters, Scenes"] --> ChapterComponents
+Libs["Shared Libraries<br/>utils.ts, assets.ts, motion.ts"] --> AllComponents["All Components"]
+Hooks["Hooks<br/>useDialog.ts, useReducedMotion.ts"] --> InteractiveComponents["Interactive Components"]
+Page["Root Page<br/>page.tsx"] --> ChapterComponents
 Layout["Root Layout<br/>layout.tsx"] --> Page
 ```
 
@@ -201,6 +239,134 @@ Flow:
 **Section sources**
 - [src/app/page.tsx:1-52](file://src/app/page.tsx#L1-L52)
 
+### Chapter Components
+
+#### EnvelopeIntro (Entrance)
+The opening component that presents the envelope animation and entry point to the letter. Features:
+- Animated envelope illustration with opening flap and floating petals
+- Character illustrations on both sides
+- Smooth scroll-to-letter functionality
+- Hidden heart with secret message
+- Reduced motion support
+
+**Section sources**
+- [src/components/entrance/EnvelopeIntro.tsx:1-182](file://src/components/entrance/EnvelopeIntro.tsx#L1-L182)
+
+#### LoveLetter
+Displays the apology letter with structured paragraphs and postscript. Key features:
+- Paper card design with botanical decorations
+- Staggered paragraph reveal animations
+- Character illustrations positioned beside the letter
+- Hidden heart integration
+- Responsive typography scaling
+
+**Section sources**
+- [src/components/letter/LoveLetter.tsx:1-99](file://src/components/letter/LoveLetter.tsx#L1-L99)
+
+#### StoryTimeline
+Renders the two-day reflection and realization scene. Includes:
+- Alternating left/right story panels
+- Scene illustrations for each story beat
+- Secret letter interaction
+- Scroll-triggered animations
+- Hidden heart placement
+
+**Section sources**
+- [src/components/story/StoryTimeline.tsx:1-88](file://src/components/story/StoryTimeline.tsx#L1-L88)
+
+#### MemoryGallery and MemoryLightbox
+Photo gallery with lightbox functionality:
+- Grid display of featured memories with polaroid styling
+- Full-screen lightbox with navigation controls
+- Touch/swipe support for mobile
+- Keyboard navigation (arrow keys, escape)
+- Caption resolution system
+- Accessible dialog implementation
+
+**Section sources**
+- [src/components/memories/MemoryGallery.tsx:1-120](file://src/components/memories/MemoryGallery.tsx#L1-L120)
+- [src/components/memories/MemoryLightbox.tsx:1-170](file://src/components/memories/MemoryLightbox.tsx#L1-L170)
+
+#### PromiseCards
+Three commitment cards with icons:
+- Card-based layout with hover effects
+- Icon system for different commitment types
+- Staggered reveal animations
+- Reduced motion support
+
+**Section sources**
+- [src/components/promises/PromiseCards.tsx:1-72](file://src/components/promises/PromiseCards.tsx#L1-L72)
+
+#### HugSection
+Closing interactive hug interaction with confirmation state:
+- Character animations showing hug sequence
+- Heart glyph animation on hug completion
+- Button state management
+- Secondary note display
+- Sunset garden background
+
+**Section sources**
+- [src/components/ending/HugSection.tsx:1-155](file://src/components/ending/HugSection.tsx#L1-L155)
+
+### Effect Components
+
+#### FloatingPetals
+Ambient drifting petals with deterministic positioning:
+- Configurable count and variant (petal/heart)
+- Seeded random generation for consistent SSR/hydration
+- Automatic removal when reduced motion is enabled
+- Infinite looping animations
+
+**Section sources**
+- [src/components/effects/FloatingPetals.tsx:1-71](file://src/components/effects/FloatingPetals.tsx#L1-L71)
+
+#### HiddenHearts
+Interactive heart buttons revealing hidden messages:
+- Accessible button with expand/collapse functionality
+- Positioned panel with smooth animations
+- Click-outside-to-close behavior
+- Keyboard support (Escape to close)
+- Configurable alignment and positioning
+
+**Section sources**
+- [src/components/effects/HiddenHearts.tsx:1-98](file://src/components/effects/HiddenHearts.tsx#L1-L98)
+
+#### FlowerGarden
+Interactive flower strip with hidden notes:
+- Mix of decorative and interactive flowers
+- Click/tap interactions to reveal messages
+- Swaying animations for decorative flowers
+- Live region announcements for accessibility
+- Reduced motion support
+
+**Section sources**
+- [src/components/effects/FlowerGarden.tsx:1-129](file://src/components/effects/FlowerGarden.tsx#L1-L129)
+
+### Illustration Components
+
+#### Botanicals
+SVG-based botanical illustrations:
+- Flower component with configurable tones and petal counts
+- Sprig and tape strip decorative elements
+- Heart glyph and stamp illustrations
+- Small envelope decoration
+- Consistent color palette system
+
+**Section sources**
+- [src/components/illustrations/Botanicals.tsx:1-191](file://src/components/illustrations/Botanicals.tsx#L1-L191)
+
+#### Characters
+Character illustrations with pose and mood variations:
+- Person component with female/male variants
+- Multiple poses (sit, offer, hug, wave)
+- Mood variations (smile, soft, shy, look)
+- Mirrored rendering for character pairs
+- Couple component for side-by-side arrangement
+- Consistent 180×210 grid system
+
+**Section sources**
+- [src/components/illustrations/Characters.tsx:1-283](file://src/components/illustrations/Characters.tsx#L1-L283)
+
 ### Data Layer
 - `site-content.ts`: Centralized copy for personalization and chapter text.
 - `memories.ts`: Typed photo entries with rotation and featured flags; derives featured list.
@@ -233,7 +399,7 @@ Usage patterns:
 
 ### Accessibility Hooks
 - `useDialog.ts`: Implements focus trapping, Escape-to-close, scroll lock, and focus restoration. Used by modals such as the secret letter and lightbox.
-- `useReducedMotion.ts`: Wraps Motion’s reduced-motion hook to respect user preferences.
+- `useReducedMotion.ts`: Wraps Motion's reduced-motion hook to respect user preferences.
 
 Behavioral guarantees:
 - Keyboard navigation remains predictable inside dialogs.
@@ -243,23 +409,6 @@ Behavioral guarantees:
 **Section sources**
 - [src/hooks/useDialog.ts:1-98](file://src/hooks/useDialog.ts#L1-L98)
 - [src/hooks/useReducedMotion.ts:1-12](file://src/hooks/useReducedMotion.ts#L1-L12)
-
-### Chapter Components Overview
-- EnvelopeIntro: Presents the opening message and entry button.
-- LoveLetter: Displays the apology letter with structured paragraphs and postscript.
-- StoryTimeline: Renders the two-day reflection and realization scene.
-- MemoryGallery: Shows a grid of featured photos and a lightbox view for all memories.
-- PromiseCards: Presents three commitment cards with icons.
-- FlowerGarden: Interactive flowers revealing hidden notes.
-- HugSection: Closing interactive hug interaction with confirmation state.
-
-These components primarily consume data from `site-content.ts`, `memories.ts`, and `interludes.ts`, and rely on shared libraries and hooks for rendering and interactions.
-
-**Section sources**
-- [src/app/page.tsx:1-52](file://src/app/page.tsx#L1-L52)
-- [src/data/site-content.ts:1-65](file://src/data/site-content.ts#L1-L65)
-- [src/data/memories.ts:1-59](file://src/data/memories.ts#L1-L59)
-- [src/data/interludes.ts:1-111](file://src/data/interludes.ts#L1-L111)
 
 ### Data Models
 ```mermaid
@@ -343,7 +492,7 @@ LogInfo --> End(["Done"])
 sequenceDiagram
 participant User as "User"
 participant Gallery as "MemoryGallery"
-participant Lightbox as "Lightbox"
+participant Lightbox as "MemoryLightbox"
 participant Hook as "useDialog"
 participant Body as "Document Body"
 User->>Gallery : Click a memory card
@@ -351,6 +500,8 @@ Gallery->>Lightbox : Open lightbox with selected image
 Lightbox->>Hook : useDialog({ open : true })
 Hook->>Body : Lock background scroll
 Hook->>Lightbox : Focus first focusable element
+User->>Lightbox : Press ArrowRight/ArrowLeft
+Lightbox->>Lightbox : Navigate to next/previous image
 User->>Lightbox : Press Escape
 Lightbox->>Hook : onClose()
 Hook->>Body : Restore previous overflow
@@ -359,36 +510,43 @@ Hook->>Lightbox : Return focus to trigger
 
 **Diagram sources**
 - [src/hooks/useDialog.ts:1-98](file://src/hooks/useDialog.ts#L1-L98)
+- [src/components/memories/MemoryLightbox.tsx:39-51](file://src/components/memories/MemoryLightbox.tsx#L39-L51)
 
 ## Dependency Analysis
 High-level dependencies:
 - `page.tsx` depends on chapter components and shared layout components.
 - Chapter components depend on data modules (`site-content.ts`, `memories.ts`, `interludes.ts`).
+- Effect and illustration components are consumed by chapter components.
 - Shared libraries (`utils.ts`, `assets.ts`, `motion.ts`) are consumed by multiple components.
 - Hooks (`useDialog.ts`, `useReducedMotion.ts`) are used by interactive components (e.g., lightbox, secret letter).
 
 ```mermaid
 graph TB
-Page["page.tsx"] --> Envelope["EnvelopeIntro"]
+Page["page.tsx"] --> Entrance["EnvelopeIntro"]
 Page --> Letter["LoveLetter"]
 Page --> Timeline["StoryTimeline"]
 Page --> Gallery["MemoryGallery"]
 Page --> Promises["PromiseCards"]
 Page --> Garden["FlowerGarden"]
-Page --> Hug["HugSection"]
-Envelope --> SiteContent["site-content.ts"]
-Letter --> SiteContent
-Timeline --> Interludes["interludes.ts"]
-Gallery --> Memories["memories.ts"]
-Promises --> Interludes
-Garden --> Interludes
-Hug --> SiteContent
+Page --> Ending["HugSection"]
+Entrance --> Effects["FloatingPetals, HiddenHearts"]
+Entrance --> Characters["Characters"]
+Letter --> Botanicals["Botanicals"]
+Letter --> Hearts["HiddenHearts"]
+Timeline --> Scenes["Scenes"]
+Timeline --> Hearts
+Gallery --> Botanicals
+Gallery --> Hearts
+Gallery --> Lightbox["MemoryLightbox"]
+Ending --> Botanicals
+Ending --> Characters
+Ending --> Petals["FloatingPetals"]
 Gallery --> Utils["utils.ts"]
 Gallery --> Assets["assets.ts"]
 Timeline --> Motion["motion.ts"]
 Garden --> Motion
-Hug --> Motion
-Lightbox["Lightbox"] --> DialogHook["useDialog.ts"]
+Ending --> Motion
+Lightbox --> DialogHook["useDialog.ts"]
 Lightbox --> ReducedMotion["useReducedMotion.ts"]
 ```
 
@@ -420,6 +578,8 @@ Lightbox --> ReducedMotion["useReducedMotion.ts"]
 - Animation timings and easings are centralized to maintain consistent, calm motion.
 - Reduced motion support is provided through a dedicated hook to honor user preferences.
 - The root layout avoids indexing the site to prevent unnecessary search engine crawling.
+- Effect components like FloatingPetals automatically disable themselves when reduced motion is detected.
+- SVG illustrations are lightweight and scalable without external dependencies.
 
 [No sources needed since this section provides general guidance]
 
@@ -435,6 +595,12 @@ Lightbox --> ReducedMotion["useReducedMotion.ts"]
   - Check that focusable elements have proper attributes and are visible when the dialog opens.
 - Animations feel too fast/slow:
   - Adjust timing through the centralized `motion.ts` constants rather than ad-hoc values in components.
+- Effect components not appearing:
+  - Check if reduced motion is enabled in browser settings.
+  - Verify that the parent component is passing correct props to effect components.
+- Illustration components not rendering:
+  - Ensure SVG viewBox attributes are correctly configured.
+  - Check that color tokens in Botanicals.tsx match the design system.
 
 **Section sources**
 - [scripts/convert-memories.mjs:1-42](file://scripts/convert-memories.mjs#L1-L42)
@@ -442,8 +608,10 @@ Lightbox --> ReducedMotion["useReducedMotion.ts"]
 - [src/lib/utils.ts:16-26](file://src/lib/utils.ts#L16-L26)
 - [src/hooks/useDialog.ts:21-96](file://src/hooks/useDialog.ts#L21-L96)
 - [src/lib/motion.ts:1-62](file://src/lib/motion.ts#L1-L62)
+- [src/components/effects/FloatingPetals.tsx:19-21](file://src/components/effects/FloatingPetals.tsx#L19-L21)
+- [src/components/illustrations/Botanicals.tsx:5-10](file://src/components/illustrations/Botanicals.tsx#L5-L10)
 
 ## Conclusion
-The codebase organizes a heartfelt, chapter-based single-page experience with clear separation of concerns: data, types, shared libraries, hooks, and components. The root page orchestrates the narrative flow, while shared utilities and hooks ensure consistency, accessibility, and performance. The asset pipeline ensures images are optimized for web delivery, and the design keeps the experience calm and readable.
+The codebase organizes a heartfelt, chapter-based single-page experience with clear separation of concerns: data, types, shared libraries, hooks, and components. The root page orchestrates the narrative flow, while shared utilities and hooks ensure consistency, accessibility, and performance. The component hierarchy is well-organized with dedicated directories for chapters, effects, and illustrations. The asset pipeline ensures images are optimized for web delivery, and the design keeps the experience calm and readable. The modular architecture allows for easy maintenance and extension of individual components while maintaining overall coherence.
 
 [No sources needed since this section summarizes without analyzing specific files]

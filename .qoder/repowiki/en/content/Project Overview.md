@@ -11,7 +11,26 @@
 - [ui-guidelines.md](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/ui-guidelines.md)
 - [color-palette.md](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/color-palette.md)
 - [animation-guidelines.md](file://A-Little-World-For-You-Design-Asset-Pack/ANIMATIONS/animation-guidelines.md)
+- [page.tsx](file://src/app/page.tsx)
+- [EnvelopeIntro.tsx](file://src/components/entrance/EnvelopeIntro.tsx)
+- [LoveLetter.tsx](file://src/components/letter/LoveLetter.tsx)
+- [StoryTimeline.tsx](file://src/components/story/StoryTimeline.tsx)
+- [MemoryGallery.tsx](file://src/components/memories/MemoryGallery.tsx)
+- [PromiseCards.tsx](file://src/components/promises/PromiseCards.tsx)
+- [HugSection.tsx](file://src/components/ending/HugSection.tsx)
+- [site-content.ts](file://src/data/site-content.ts)
+- [memories.ts](file://src/data/memories.ts)
+- [interludes.ts](file://src/data/interludes.ts)
+- [package.json](file://package.json)
 </cite>
+
+## Update Summary
+**Changes Made**
+- Updated the project overview to reflect the complete transformation from a standard Next.js template into the fully implemented “A Little World For You” romantic gift website.
+- Added documentation for the six single-page narrative sections: envelope introduction, love letter, story timeline, memory gallery, promise cards, and closing hug.
+- Updated architecture diagrams to map directly to the actual Next.js components and data files.
+- Revised developer guidance to describe how the design asset pack now drives a concrete, runnable application rather than only a specification document.
+- Added section-level sources for all newly analyzed implementation files.
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -25,152 +44,219 @@
 9. [Conclusion](#conclusion)
 
 ## Introduction
-This project is a creative specification and design direction document for building a romantic apology website called **A Little World For You**. It is not the final application itself; it is the blueprint that guides developers to implement a complete, emotionally sincere, and visually polished Next.js experience.
+This project is both a creative specification and a fully implemented romantic apology website called **A Little World For You**. The `A-Little-World-For-You-Design-Asset-Pack` defines the watercolor aesthetic, character design approach, emotional storytelling goals, and Vietnamese cultural context. The repository under `` is the finished Next.js application that brings that specification to life as a single-page narrative experience.
 
-The asset pack defines:
-- A watercolor aesthetic with warm cream, blush pink, peach, sky blue, and sage tones.
-- A consistent illustrated couple and scrapbook-like visual language.
-- A six-chapter emotional story written in intimate Vietnamese using “anh” and “em.”
-- Clear UI, typography, color, animation, and accessibility rules.
-- Concrete instructions for how a developer or AI coding assistant should build the final website.
+The website is not a generic template or commercial landing page. It is a personal gift built by a boyfriend for his girlfriend after a misunderstanding hurt her. Its purpose is to communicate accountability, sincerity, appreciation, and affection without pressuring her to forgive immediately. The tone uses intimate Vietnamese with “anh” and “em,” establishing closeness, respect, and tenderness.
 
-The target audience is a romantic gift recipient — typically a girlfriend receiving a personal apology from her boyfriend. The cultural context is Vietnamese intimacy, where “anh/em” establishes closeness, respect, and tenderness. The tone must avoid pressure, guilt, blame, or dramatic manipulation. The website should feel like a small, handmade world prepared with sincerity.
+The final application follows the design asset pack’s direction through six scrollable chapters:
+1. Envelope introduction — a gentle entry into a small world made for her.
+2. Love letter — a sincere apology written on paper-like cardstock.
+3. Story timeline — two days that went wrong and what he understood afterward.
+4. Memory gallery — real photos presented as Polaroid-style scrapbook cards.
+5. Promise cards — three realistic commitments about behavior change.
+6. Closing hug — a warm, non-demanding ending where he gives a hug and she receives it.
+
+**Section sources**
+- [README.md:1-8](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L1-L8)
+- [MASTER-PROMPT.md:17-33](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L17-L33)
+- [MASTER-PROMPT.md:36-72](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L36-L72)
+- [page.tsx:11-14](file://src/app/page.tsx#L11-L14)
 
 ## Project Structure
-The asset pack is organized into focused areas that together form a complete creative and technical brief:
+The completed project consists of two cooperating layers:
+
+- The **design asset pack**, which is the authoritative creative and technical specification.
+- The **Next.js application**, which implements that specification as a static, single-page romantic gift website.
 
 ```mermaid
 graph TB
-Root["A Little World For You<br/>Design Asset Pack"] --> Readme["README.md"]
-Root --> Design["DESIGN/"]
-Root --> Story["STORY/"]
-Root --> Animations["ANIMATIONS/"]
-Root --> Codex["CODEX/"]
-Root --> Assets["ASSETS/"]
-Design --> DS["design-system.md"]
-Design --> UI["ui-guidelines.md"]
-Design --> CP["color-palette.md"]
-Story --> SO["story-overview.md"]
-Story --> C1["chapter-01.md"]
-Story --> C2["chapter-02.md"]
-Animations --> AG["animation-guidelines.md"]
-Codex --> MP["MASTER-PROMPT.md"]
-Assets --> UR["ui-reference/<br/>concept boards"]
+Root["A Little World For You<br/>Complete Project"] --> Spec["Design Asset Pack<br/>Creative Specification"]
+Root --> App["Next.js Application<br/>Romantic Gift Website"]
+Spec --> DS["DESIGN/"]
+Spec --> ST["STORY/"]
+Spec --> AN["ANIMATIONS/"]
+Spec --> MP["CODEX/MASTER-PROMPT.md"]
+App --> Page["src/app/page.tsx"]
+App --> Entrance["components/entrance/EnvelopeIntro.tsx"]
+App --> Letter["components/letter/LoveLetter.tsx"]
+App --> Timeline["components/story/StoryTimeline.tsx"]
+App --> Memories["components/memories/MemoryGallery.tsx"]
+App --> Promises["components/promises/PromiseCards.tsx"]
+App --> Hug["components/ending/HugSection.tsx"]
+App --> Data["src/data/*"]
+MP --> DS
+MP --> ST
+MP --> AN
+MP --> App
 ```
 
 **Diagram sources**
 - [README.md:12-17](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L12-L17)
-- [design-system.md:1-49](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/design-system.md#L1-L49)
-- [ui-guidelines.md:1-56](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/ui-guidelines.md#L1-L56)
-- [color-palette.md:1-22](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/color-palette.md#L1-L22)
-- [story-overview.md:1-20](file://A-Little-World-For-You-Design-Asset-Pack/STORY/story-overview.md#L1-L20)
-- [chapter-01.md:1-10](file://A-Little-World-For-You-Design-Asset-Pack/STORY/chapter-01.md#L1-L10)
-- [chapter-02.md:1-23](file://A-Little-World-For-You-Design-Asset-Pack/STORY/chapter-02.md#L1-L23)
-- [animation-guidelines.md:1-29](file://A-Little-World-For-You-Design-Asset-Pack/ANIMATIONS/animation-guidelines.md#L1-L29)
-- [MASTER-PROMPT.md:1-223](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L1-L223)
+- [MASTER-PROMPT.md:127-180](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L127-L180)
+- [page.tsx:1-49](file://src/app/page.tsx#L1-L49)
+
+The design asset pack remains the source of truth for tone, copy, visual direction, animation principles, and accessibility rules. The Next.js application is the runnable result of following those instructions.
 
 **Section sources**
-- [README.md:1-30](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L1-L30)
+- [README.md:1-8](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L1-L8)
+- [MASTER-PROMPT.md:75-84](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L75-L84)
+- [page.tsx:1-49](file://src/app/page.tsx#L1-L49)
 
 ## Core Components
-The asset pack can be understood as five core components:
+The implemented website can be understood as six narrative sections plus shared infrastructure:
 
-| Component | Purpose | Key Guidance |
+| Section | Purpose | Implementation |
 |---|---|---|
-| Creative Direction | Defines the watercolor, scrapbook, and romantic tone | Warm, handmade, intimate, non-generic, non-pressure |
-| Design System | Provides colors, typography, shape language, layout, and UI rules | Cream background, serif display, friendly sans-serif body, readable contrast |
-| Story Content | Supplies the emotional arc and Vietnamese copy | Six chapters, “anh/em” voice, accountability without blame |
-| Animation Guidelines | Specifies motion principles and implementation constraints | Calm, organic, reduced-motion aware, no autoplay audio |
-| Implementation Prompt | Tells developers how to build the final Next.js site | App Router, React, TypeScript, Tailwind, Motion, Lucide, Vercel-ready |
+| Envelope Introduction | Welcomes the recipient into a small, personal world | `components/entrance/EnvelopeIntro.tsx` |
+| Love Letter | Delivers the core apology with signature and date | `components/letter/LoveLetter.tsx` |
+| Story Timeline | Narrates the two mistakes and the realization | `components/story/StoryTimeline.tsx` |
+| Memory Gallery | Shows real photos as Polaroid-style cards with lightbox | `components/memories/MemoryGallery.tsx` |
+| Promise Cards | Presents three behavioral commitments | `components/promises/PromiseCards.tsx` |
+| Closing Hug | Ends with a warm, non-demanding interaction | `components/ending/HugSection.tsx` |
 
-These components work together so that the final website feels like a cohesive romantic story rather than a generic template.
+Shared infrastructure includes:
+- Single-page composition in `src/app/page.tsx`.
+- Canonical copy in `src/data/site-content.ts`, `src/data/memories.ts`, and `src/data/interludes.ts`.
+- Motion tokens, utilities, and reduced-motion handling.
+- Watercolor-inspired UI components such as buttons, paper cards, and section headings.
+
+These components work together so the final site feels like one cohesive romantic story rather than a collection of unrelated pages.
 
 **Section sources**
-- [design-system.md:1-49](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/design-system.md#L1-L49)
-- [ui-guidelines.md:1-56](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/ui-guidelines.md#L1-L56)
-- [color-palette.md:1-22](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/color-palette.md#L1-L22)
-- [story-overview.md:1-20](file://A-Little-World-For-You-Design-Asset-Pack/STORY/story-overview.md#L1-L20)
-- [animation-guidelines.md:1-29](file://A-Little-World-For-You-Design-Asset-Pack/ANIMATIONS/animation-guidelines.md#L1-L29)
-- [MASTER-PROMPT.md:13-28](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L13-L28)
+- [page.tsx:1-49](file://src/app/page.tsx#L1-L49)
+- [EnvelopeIntro.tsx:1-182](file://src/components/entrance/EnvelopeIntro.tsx#L1-L182)
+- [LoveLetter.tsx:1-99](file://src/components/letter/LoveLetter.tsx#L1-L99)
+- [StoryTimeline.tsx:1-88](file://src/components/story/StoryTimeline.tsx#L1-L88)
+- [MemoryGallery.tsx:1-120](file://src/components/memories/MemoryGallery.tsx#L1-L120)
+- [PromiseCards.tsx:1-72](file://src/components/promises/PromiseCards.tsx#L1-L72)
+- [HugSection.tsx:1-155](file://src/components/ending/HugSection.tsx#L1-L155)
 
 ## Architecture Overview
-At a high level, this asset pack sits beside the final Next.js application as its creative and technical specification. The relationship is:
+At a high level, the relationship between the design asset pack and the Next.js application is now concrete: the specification defines the experience, and the application renders it as a single-page scrollable narrative.
 
 ```mermaid
 graph TB
 Spec["Design Asset Pack<br/>Creative Specification"] --> Dev["Developer / Codex"]
-Spec --> NextApp["Next.js Application<br/>Romantic Apology Website"]
+Spec --> App["Next.js Application<br/>Single-Page Romantic Gift"]
 subgraph "Specification"
-DS["Design System"]
-ST["Story Chapters"]
-AN["Animation Rules"]
-MP["Master Prompt"]
+DS["DESIGN/"]
+ST["STORY/"]
+AN["ANIMATIONS/"]
+MP["CODEX/MASTER-PROMPT.md"]
 end
-DS --> NextApp
-ST --> NextApp
-AN --> NextApp
+subgraph "Application"
+Page["src/app/page.tsx"]
+Sections["Six Narrative Sections"]
+Data["src/data/*"]
+Effects["Effects & Illustrations"]
+end
+DS --> App
+ST --> App
+AN --> App
 MP --> Dev
-Dev --> NextApp
+MP --> App
+Dev --> App
 ```
 
 **Diagram sources**
 - [README.md:24-30](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L24-L30)
-- [MASTER-PROMPT.md:1-11](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L1-L11)
-- [MASTER-PROMPT.md:18-27](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L18-L27)
+- [MASTER-PROMPT.md:478-524](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L478-L524)
+- [page.tsx:1-49](file://src/app/page.tsx#L1-L49)
 
-The asset pack does not replace the application code. Instead, it tells the developer what to build, how it should look, how it should behave, and which content should be used.
+The asset pack does not replace the application code. Instead, it tells developers what to build, how it should look, how it should behave, and which content should be used. The current repository already contains the resulting Next.js App Router + TypeScript application built with React 19, Tailwind CSS v4, Motion, and Lucide React.
 
 **Section sources**
 - [README.md:24-30](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L24-L30)
-- [MASTER-PROMPT.md:1-27](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L1-L27)
+- [MASTER-PROMPT.md:88-99](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L88-L99)
+- [package.json:13-18](file://package.json#L13-L18)
 
 ## Detailed Component Analysis
 
-### Creative Direction and Watercolor Aesthetic
-The design direction emphasizes a gentle watercolor storybook mixed with a romantic scrapbook. It avoids glossy gradients, hard shadows, neon effects, corporate layouts, and excessive glassmorphism. The intended feeling is handmade, warm, intimate, and sincere.
+### Envelope Introduction
+The envelope introduction is Chapter 01. It opens with a cream background, an illustrated envelope, floating petals, hidden hearts, and the two consistent characters. Clicking the button animates the envelope flap, slides the letter up, releases petals, and scrolls smoothly to the love letter. If the user never clicks, the site remains fully readable by scrolling.
 
-Key aesthetic requirements include:
-- Soft watercolor washes and paper texture.
-- Warm cream base with blush, peach, muted rose, pale sky blue, and sage accents.
-- Hand-painted flowers, petals, letters, envelopes, Polaroids, and garden scenery.
-- Consistent illustrated characters representing a young man and young woman.
-- Elegant, warm, intimate, and slightly playful visuals.
-
-The color palette reinforces this direction by balancing cream/paper backgrounds with soft blush, peach, sky/sage tones, and small rose accents.
+Key behaviors:
+- Envelope illustration is visible from load; it does not fade in after loading.
+- Button toggles between opening the envelope and reading the letter.
+- Hidden heart discovery adds warmth without gating progress.
+- Reduced motion is respected.
 
 **Section sources**
-- [README.md:5-10](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L5-L10)
-- [design-system.md:3-4](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/design-system.md#L3-L4)
-- [color-palette.md:1-22](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/color-palette.md#L1-L22)
-- [MASTER-PROMPT.md:29-43](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L29-L43)
+- [EnvelopeIntro.tsx:15-182](file://src/components/entrance/EnvelopeIntro.tsx#L15-L182)
+- [MASTER-PROMPT.md:188-209](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L188-L209)
 
-### Character Design Approach
-The character design approach centers on two illustrated human figures — one male, one female — whose appearance remains consistent across the website. They are part of a comic-style illustration and scrapbook aesthetic, not realistic photography.
+### Love Letter
+The love letter is Chapter 02. It presents the canonical apology on a paper-like card with floral decorations, a stamp, handwritten signature, and date. Paragraphs reveal gently on scroll, and the postscript clarifies that forgiveness is not required immediately.
 
-Important constraints:
-- Keep their visual treatment consistent wherever they appear.
-- Do not treat concept boards as transparent PNG layers.
-- If individual assets are unavailable, use restrained CSS/SVG decorations or simple vector shapes consistent with the watercolor direction.
-- Replace placeholder illustrations with real assets only when production-ready files exist.
+Key behaviors:
+- Uses canonical copy from `site-content.ts`.
+- Reveals paragraphs with staggered motion.
+- Keeps Pacifico only for short handwritten accents.
+- Includes a hidden heart near the end.
 
 **Section sources**
-- [README.md:6-8](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L6-L8)
-- [README.md:19-23](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L19-L23)
-- [MASTER-PROMPT.md:32-38](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L32-L38)
-- [MASTER-PROMPT.md:44-52](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L44-L52)
+- [LoveLetter.tsx:22-99](file://src/components/letter/LoveLetter.tsx#L22-L99)
+- [site-content.ts:25-38](file://src/data/site-content.ts#L25-L38)
+- [MASTER-PROMPT.md:210-237](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L210-L237)
 
-### Emotional Storytelling Goals
-The storytelling goal is an apology that communicates accountability, sincerity, appreciation, and affection without pressuring the recipient to forgive immediately. The emotional arc moves through curiosity, sincerity, recognition, warmth, commitment, and gentle closure.
+### Story Timeline
+The story timeline is Chapter 03. It narrates the two days that went wrong and the realization that the problem was not really about the avatar but about accepting care gently and listening to emotions. Each scene alternates illustration and text along a vertical timeline.
 
-The core message is about understanding why his reaction hurt her, learning to care better for her emotions, and showing change through behavior rather than just words. The tone must remain natural, intimate, and warm in Vietnamese, using “anh” and “em,” while avoiding over-dramatic guilt, manipulation, blame, or pressure.
+Key behaviors:
+- Three scenes with scroll-triggered reveals.
+- Illustrated scenes using consistent watercolor style.
+- Secret letter interlude embedded near Scene 3.
+- Hidden heart discovery integrated into the chapter.
 
 **Section sources**
-- [story-overview.md:3-19](file://A-Little-World-For-You-Design-Asset-Pack/STORY/story-overview.md#L3-L19)
-- [MASTER-PROMPT.md:13-17](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L13-L17)
-- [MASTER-PROMPT.md:164-172](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L164-L172)
+- [StoryTimeline.tsx:13-88](file://src/components/story/StoryTimeline.tsx#L13-L88)
+- [interludes.ts:3-26](file://src/data/interludes.ts#L3-L26)
+- [MASTER-PROMPT.md:238-259](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L238-L259)
+
+### Memory Gallery
+The memory gallery is Chapter 04. It shows four Polaroid-style cards in the grid while keeping all five real photos available in the lightbox. The near-duplicate photo stays accessible without taking a card slot. Captions are intentionally placeholders until the owner fills them in.
+
+Key behaviors:
+- Four featured cards in a responsive grid.
+- All five photos in the lightbox.
+- Paper matting, tape strips, and slight rotation.
+- Lightbox supports keyboard navigation, Escape, focus trap, and touch.
+- Alt text describes real photo content; captions remain editable.
+
+**Section sources**
+- [MemoryGallery.tsx:17-120](file://src/components/memories/MemoryGallery.tsx#L17-L120)
+- [memories.ts:4-59](file://src/data/memories.ts#L4-L59)
+- [MASTER-PROMPT.md:260-309](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L260-L309)
+
+### Promise Cards
+The promise cards are Chapter 05. They present three realistic commitments about behavior change rather than demanding immediate trust or forgiveness. Each card has an icon, eyebrow label, title, and body.
+
+Key behaviors:
+- Sequential reveal with subtle scale and opacity.
+- Focuses on listening, appreciating care, and changing through action.
+- Explicitly avoids framing promises as a demand for forgiveness.
+
+**Section sources**
+- [PromiseCards.tsx:12-72](file://src/components/promises/PromiseCards.tsx#L12-L72)
+- [interludes.ts:28-51](file://src/data/interludes.ts#L28-L51)
+- [MASTER-PROMPT.md:310-326](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L310-L326)
+
+### Closing Hug
+The closing hug is Chapter 06. It is the emotional closure of the website. The direction is fixed: he sends the hug, she receives it. The button says “Nhận cái ôm của anh,” and the confirmation reads “Anh đã gửi em một cái ôm. Cảm ơn em ❤️.” Nothing is transmitted anywhere; the state is local.
+
+Key behaviors:
+- Characters move toward each other when hugged.
+- A heart blooms between them.
+- Confirmation appears without pressure.
+- Secondary note invites reciprocity only if she wants to.
+
+**Section sources**
+- [HugSection.tsx:16-155](file://src/components/ending/HugSection.tsx#L16-L155)
+- [site-content.ts:40-55](file://src/data/site-content.ts#L40-L55)
+- [MASTER-PROMPT.md:327-358](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L327-L358)
 
 ### Relationship Between Asset Pack and Final Next.js Application
-The asset pack is meant to be read alongside a Next.js repository. Developers should:
+The asset pack is meant to be read alongside the Next.js repository. Developers should:
 - Inspect the existing repository structure.
 - Use the design system, story content, and animation guidelines as constraints.
 - Build a single-page story with six sections.
@@ -178,12 +264,12 @@ The asset pack is meant to be read alongside a Next.js repository. Developers sh
 - Create a clean Next.js App Router + TypeScript project if none exists.
 - Treat the asset pack as authoritative guidance, not optional inspiration.
 
-The final application should be a static personal experience without unnecessary backend features unless explicitly requested.
+The final application is a static personal experience without unnecessary backend features unless explicitly requested.
 
 **Section sources**
 - [README.md:24-30](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L24-L30)
-- [MASTER-PROMPT.md:5-11](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L5-L11)
-- [MASTER-PROMPT.md:18-27](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L18-L27)
+- [MASTER-PROMPT.md:75-84](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L75-L84)
+- [MASTER-PROMPT.md:478-524](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L478-L524)
 
 ### Target Audience and Cultural Context
 The recipient is a romantic partner receiving a personal apology. The cultural context is Vietnamese intimacy, where “anh” and “em” establish closeness and tenderness. The website should feel like a small world prepared specifically for her, not a public marketing page.
@@ -197,7 +283,7 @@ Guidance includes:
 
 **Section sources**
 - [story-overview.md:14-19](file://A-Little-World-For-You-Design-Asset-Pack/STORY/story-overview.md#L14-L19)
-- [MASTER-PROMPT.md:164-172](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L164-L172)
+- [MASTER-PROMPT.md:63-72](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L63-L72)
 
 ### How Developers Should Use This Documentation
 Developers should treat this asset pack as the source of truth for design, tone, content, and interaction behavior. The recommended workflow is:
@@ -226,14 +312,14 @@ Personalize --> Deploy["Test and Deploy"]
 
 **Diagram sources**
 - [README.md:24-30](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L24-L30)
-- [MASTER-PROMPT.md:187-198](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L187-L198)
+- [MASTER-PROMPT.md:615-636](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L615-L636)
 
 **Section sources**
 - [README.md:24-30](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L24-L30)
-- [MASTER-PROMPT.md:187-223](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L187-L223)
+- [MASTER-PROMPT.md:615-636](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L615-L636)
 
 ## Dependency Analysis
-The asset pack has clear internal dependencies:
+The asset pack has clear internal dependencies, and the application depends on those documents for correct implementation:
 
 - The master prompt depends on the README, design system, story, and animation guidelines.
 - The UI guidelines depend on the design system’s visual direction.
@@ -256,14 +342,14 @@ CH2 --> ST
 ```
 
 **Diagram sources**
-- [MASTER-PROMPT.md:5-11](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L5-L11)
+- [MASTER-PROMPT.md:1-14](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L1-L14)
 - [ui-guidelines.md:1-56](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/ui-guidelines.md#L1-L56)
 - [story-overview.md:1-20](file://A-Little-World-For-You-Design-Asset-Pack/STORY/story-overview.md#L1-L20)
 - [chapter-01.md:1-10](file://A-Little-World-For-You-Design-Asset-Pack/STORY/chapter-01.md#L1-L10)
 - [chapter-02.md:1-23](file://A-Little-World-For-You-Design-Asset-Pack/STORY/chapter-02.md#L1-L23)
 
 **Section sources**
-- [MASTER-PROMPT.md:5-11](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L5-L11)
+- [MASTER-PROMPT.md:1-14](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L1-L14)
 - [ui-guidelines.md:1-56](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/ui-guidelines.md#L1-L56)
 - [story-overview.md:1-20](file://A-Little-World-For-You-Design-Asset-Pack/STORY/story-overview.md#L1-L20)
 
@@ -283,8 +369,8 @@ These constraints ensure the website remains tender, readable, and performant on
 
 **Section sources**
 - [animation-guidelines.md:5-29](file://A-Little-World-For-You-Design-Asset-Pack/ANIMATIONS/animation-guidelines.md#L5-L29)
-- [MASTER-PROMPT.md:112-130](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L112-L130)
-- [MASTER-PROMPT.md:173-186](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L173-L186)
+- [MASTER-PROMPT.md:422-446](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L422-L446)
+- [MASTER-PROMPT.md:605-612](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L605-L612)
 
 ## Troubleshooting Guide
 Common issues and how to resolve them based on the asset pack:
@@ -299,17 +385,19 @@ Common issues and how to resolve them based on the asset pack:
 | Poor readability | Using pale pink for body text | Follow design system contrast rules |
 | Non-responsive layout | Ignoring mobile-first rules | Test at 360px, 390px, 430px, 768px, 1024px, and wider |
 | Missing keyboard or focus support | Accessibility oversight | Add semantic HTML, visible focus states, and keyboard controls |
+| Wrong hug direction | Confusing sender and recipient roles | Use “Nhận cái ôm của anh”; he gives, she receives |
+| Missing real photos | Skipping the memory pipeline | Convert originals to WebP and place them in `public/images/memories/` |
 
 **Section sources**
 - [README.md:19-23](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L19-L23)
 - [design-system.md:20-49](file://A-Little-World-For-You-Design-Asset-Pack/DESIGN/design-system.md#L20-L49)
 - [animation-guidelines.md:5-29](file://A-Little-World-For-You-Design-Asset-Pack/ANIMATIONS/animation-guidelines.md#L5-L29)
 - [MASTER-PROMPT.md:44-52](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L44-L52)
-- [MASTER-PROMPT.md:173-186](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L173-L186)
+- [MASTER-PROMPT.md:327-358](file://A-Little-World-For-You-Design-Asset-Pack/CODEX/MASTER-PROMPT.md#L327-L358)
 
 ## Conclusion
-**A Little World For You** is a carefully scoped creative specification for a romantic apology website. Its purpose is to guide developers toward a sincere, watercolor-styled, emotionally coherent Next.js application that respects Vietnamese cultural intimacy and the feelings of the recipient.
+**A Little World For You** is a carefully scoped creative specification and a fully implemented romantic apology website. Its purpose is to guide developers toward a sincere, watercolor-styled, emotionally coherent Next.js application that respects Vietnamese cultural intimacy and the feelings of the recipient.
 
 The most important principle is consistency: the watercolor aesthetic, character design, emotional tone, accessibility, and interaction behavior should all reinforce the same message — a genuine apology delivered gently, without pressure.
 
-When building the final application, always return to this asset pack. Let the design system define the visuals, the story define the emotion, the animation guidelines define the motion, and the master prompt define the implementation path.
+When building or maintaining the final application, always return to the design asset pack. Let the design system define the visuals, the story define the emotion, the animation guidelines define the motion, and the master prompt define the implementation path. The six chapters — envelope introduction, love letter, story timeline, memory gallery, promise cards, and closing hug — should together feel like opening a little illustrated world made with love.

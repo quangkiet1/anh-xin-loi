@@ -9,10 +9,10 @@ export const siteContent = {
   title: "A Little World For You",
 
   // --- Personal fields (replace these) ---------------------------------
-  boyfriendName: "[TÊN ANH]",
-  girlfriendName: "[TÊN EM]",
-  signature: "[CHỮ KÝ CỦA ANH]",
-  date: "[NGÀY GỬI THƯ]",
+  boyfriendName: "Quang Kiệt",
+  girlfriendName: "Phương Anh",
+  signature: "Kiệt",
+  date: "11/11/2026",
 
   // --- Chapter 01 -------------------------------------------------------
   entrance: {

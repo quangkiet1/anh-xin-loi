@@ -14,15 +14,16 @@
 - [HugSection.tsx](file://src/components/ending/HugSection.tsx)
 - [motion.ts](file://src/lib/motion.ts)
 - [useReducedMotion.ts](file://src/hooks/useReducedMotion.ts)
+- [utils.ts](file://src/lib/utils.ts)
 </cite>
 
 ## Update Summary
 **Changes Made**
-- Enhanced animation system documentation with sophisticated visual effects
-- Added detailed component analysis for floating petals, flower garden, hidden hearts, and secret letter components
-- Updated motion library integration patterns with practical implementation examples
-- Expanded accessibility considerations with reduced motion support
-- Added performance optimization techniques for smooth animations across devices
+- Updated motion library integration to use `motion/react` with comprehensive animation system
+- Added detailed analysis of floating petals, hidden hearts, flower garden, and secret letter components
+- Enhanced accessibility documentation with reduced motion support throughout all components
+- Expanded performance optimization techniques for smooth animations across devices
+- Added practical implementation examples for envelope opening, letter unfolding, and heart bloom animations
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -37,9 +38,9 @@
 10. [Conclusion](#conclusion)
 
 ## Introduction
-This document defines the animation and interaction guidelines for a gentle, romantic, watercolor-inspired experience. The enhanced animation system uses Motion (`motion/react`) for orchestrated UI animation while maintaining CSS-based ambient loops for subtle background motion. The system focuses on implementing soft, organic motion that feels like a handmade storybook—calm, slow enough to be tender, and supportive rather than distracting.
+This document defines the animation and interaction guidelines for a gentle, romantic, watercolor-inspired experience built with the Motion (`motion/react`) library. The enhanced animation system orchestrates sophisticated visual effects including floating petals, hidden hearts, flower gardens, and secret letters while maintaining full accessibility and performance across devices.
 
-The animation architecture includes sophisticated visual effects such as floating petals, flower gardens, hidden hearts, and secret letters, all designed to create an intimate, sincere experience while maintaining full accessibility and performance across devices.
+The animation architecture focuses on creating soft, organic motion that feels like a handmade storybook—calm, slow enough to be tender, and supportive rather than distracting. All animations respect user preferences through comprehensive `prefers-reduced-motion` support.
 
 **Section sources**
 - [README.md:5-10](file://A-Little-World-For-You-Design-Asset-Pack/README.md#L5-L10)
@@ -74,8 +75,8 @@ Root --> Readme
 **Diagram sources**
 - [animation-guidelines.md:1-29](file://A-Little-World-For-You-Design-Asset-Pack/ANIMATIONS/animation-guidelines.md#L1-L29)
 - [FloatingPetals.tsx:1-71](file://src/components/effects/FloatingPetals.tsx#L1-L71)
-- [FlowerGarden.tsx:1-131](file://src/components/effects/FlowerGarden.tsx#L1-L131)
-- [HiddenHearts.tsx:1-85](file://src/components/effects/HiddenHearts.tsx#L1-L85)
+- [FlowerGarden.tsx:1-129](file://src/components/effects/FlowerGarden.tsx#L1-L129)
+- [HiddenHearts.tsx:1-98](file://src/components/effects/HiddenHearts.tsx#L1-L98)
 - [SecretLetter.tsx:1-96](file://src/components/effects/SecretLetter.tsx#L1-L96)
 
 **Section sources**
@@ -85,25 +86,25 @@ Root --> Readme
 The enhanced animation system is built around these core components:
 
 ### Primary Animation Components
-- **FloatingPetals**: Ambient drifting petals and hearts with deterministic positioning
-- **FlowerGarden**: Interactive flower strip with swaying animations and note reveals
-- **HiddenHearts**: Accessible heart panels with focus management
-- **SecretLetter**: Dialog-based letter reveal with proper accessibility
+- **FloatingPetals**: Ambient drifting petals and hearts with deterministic positioning and complete reduced motion support
+- **FlowerGarden**: Interactive flower strip with swaying animations and accessible note reveals
+- **HiddenHearts**: Accessible heart panels with comprehensive focus management and keyboard navigation
+- **SecretLetter**: Fully accessible dialog-based letter reveal with proper focus trapping
 
 ### Supporting Infrastructure
-- Motion-driven orchestration for React components using shared motion language
+- Motion-driven orchestration for React components using shared motion language from `motion/react`
+- Centralized reduced motion hook ensuring consistent accessibility compliance
 - CSS-based ambient loops for subtle background motion
 - Viewport-triggered reveals for sections using `whileInView`
 - Lightweight decorative elements (petals, hearts, particles)
-- Accessible interactions with keyboard and focus management
-- Reduced-motion fallbacks through centralized hook
+- Deterministic positioning utilities for SSR compatibility
 
 Key implementation rules:
 - Use Motion (`motion/react`) for orchestrated UI animation; use CSS for ambient loops.
 - Prefer transform and opacity over layout-heavy properties.
 - Keep most transitions between 350–700ms.
 - Ambient loops should be slow (4–12s) and low amplitude.
-- Respect `prefers-reduced-motion`.
+- Respect `prefers-reduced-motion` through centralized hook.
 - Avoid excessive parallax, rapid bouncing, flashing, or constant movement behind text.
 - Ensure content remains readable if animations fail.
 
@@ -208,7 +209,7 @@ Scroll-->>User : Focused on letter
 - [EnvelopeIntro.tsx:84-176](file://src/components/entrance/EnvelopeIntro.tsx#L84-L176)
 
 ### Floating Petals and Hearts Drift
-The enhanced floating petals system provides sophisticated ambient decoration with deterministic positioning and accessibility support.
+The enhanced floating petals system provides sophisticated ambient decoration with deterministic positioning and complete accessibility support.
 
 Behavior:
 - 10 small petals or hearts drift upward with varied delays and durations
@@ -276,7 +277,7 @@ LiveRegion --> End(["Accessible Note Display"])
 - [FlowerGarden.tsx:102-127](file://src/components/effects/FlowerGarden.tsx#L102-L127)
 
 **Section sources**
-- [FlowerGarden.tsx:1-131](file://src/components/effects/FlowerGarden.tsx#L1-L131)
+- [FlowerGarden.tsx:1-129](file://src/components/effects/FlowerGarden.tsx#L1-L129)
 
 ### Hidden Hearts with Accessible Panels
 Hidden hearts provide subtle interactive elements with comprehensive accessibility support including focus management and keyboard navigation.
@@ -313,7 +314,7 @@ Focus-->>User : Focus restored
 - [HiddenHearts.tsx:51-81](file://src/components/effects/HiddenHearts.tsx#L51-L81)
 
 **Section sources**
-- [HiddenHearts.tsx:1-85](file://src/components/effects/HiddenHearts.tsx#L1-L85)
+- [HiddenHearts.tsx:1-98](file://src/components/effects/HiddenHearts.tsx#L1-L98)
 
 ### Secret Letter Dialog
 The secret letter component implements a fully accessible dialog with proper focus trapping and modal behavior.
@@ -373,7 +374,7 @@ flowchart TD
 Start(["Hug Button Click"]) --> MoveCharacters["Move Characters Together"]
 MoveCharacters --> BloomHeart["Bloom Heart Between Characters"]
 BloomHeart --> ShowConfirmation["Show Confirmation Message"]
-ShowConfirmation --> SecondaryNote["Display Secondary Note"]
+SecondaryNote["Display Secondary Note"]
 SecondaryNote --> End(["Animation Complete"])
 ```
 
@@ -382,7 +383,7 @@ SecondaryNote --> End(["Animation Complete"])
 - [HugSection.tsx:104-140](file://src/components/ending/HugSection.tsx#L104-L140)
 
 **Section sources**
-- [HugSection.tsx:1-149](file://src/components/ending/HugSection.tsx#L1-L149)
+- [HugSection.tsx:1-155](file://src/components/ending/HugSection.tsx#L1-L155)
 
 ## Motion Library Integration
 The enhanced animation system leverages Motion with a shared motion language that ensures consistency across all components.
@@ -514,4 +515,4 @@ Common issues and resolutions for the enhanced animation system:
 ## Conclusion
 These enhanced animation guidelines create a gentle, romantic, watercolor-inspired experience that feels handmade and sincere. The sophisticated animation system, featuring floating petals, flower gardens, hidden hearts, and secret letters, delivers a warm, inclusive journey while maintaining excellent performance and accessibility. By orchestrating Motion-driven animations, leveraging CSS for ambient motion, respecting reduced-motion preferences, and ensuring comprehensive accessibility, the application provides a truly intimate and thoughtful user experience.
 
-The implementation demonstrates best practices for modern web animations, including proper accessibility support, performance optimization, and consistent design patterns that can be applied across the entire application.
+The implementation demonstrates best practices for modern web animations, including proper accessibility support, performance optimization, and consistent design patterns that can be applied across the entire application. The motion/react library integration provides a robust foundation for creating beautiful, accessible animations that work seamlessly across all devices and user preferences.
