@@ -1,0 +1,1 @@
+No cross-child orchestration exists: the root holds two independent, non-code directories with no shared build, config, or wiring between them. The A-Little-World-For-You-Design-Asset-Pack side is the only structured project (DESIGN, STORY, CODEX, ASSETS, ANIMATIONS); kỉ niệm is a flat image dump.

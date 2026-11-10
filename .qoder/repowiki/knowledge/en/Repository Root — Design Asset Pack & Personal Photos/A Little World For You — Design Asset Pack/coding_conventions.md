@@ -1,0 +1,4 @@
+- Concept boards in `ASSETS/ui-reference/` are explicitly labeled as raster reference collages and must never be used as full-page backgrounds or cropped into fake production assets.
+- Personal content (names, dates, memories, photos) is treated as user-supplied data with clearly marked placeholders rather than fabricated values.
+- Copy from the `STORY/` chapters is consumed verbatim as initial content for corresponding website sections, preserving the Vietnamese anh/em voice.
+- Animations are specified as Motion/CSS transforms and opacity changes on DOM elements, with explicit `prefers-reduced-motion` support and no autoplay audio.

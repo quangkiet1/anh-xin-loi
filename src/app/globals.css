@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Design tokens — mirrored from DESIGN/design-system.md
+   Contrast note: --color-muted and --color-rose-deep are deliberately
+   darkened so every text pairing in this palette passes WCAG AA on cream.
+   --color-rose / --color-peach / --color-sage are decoration only.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream: #fff9f2;
+  --color-paper: #fffdf9;
+  --color-blush: #f7dce2;
+  --color-rose: #d98fa0;
+  --color-rose-deep: #8f4f60;
+  --color-peach: #f5c7ae;
+  --color-sky: #dceaf2;
+  --color-sage: #c8d2be;
+  --color-ink: #59464a;
+  --color-muted: #7a6466;
+
+  --radius-card: 1.5rem;
+  --radius-paper: 1.75rem;
+
+  --shadow-paper: 0 18px 40px -24px rgb(89 70 74 / 0.45), 0 2px 0 rgb(255 255 255 / 0.6) inset;
+  --shadow-lift: 0 26px 50px -28px rgb(89 70 74 / 0.5);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-playfair);
+  --font-sans: var(--font-nunito);
+  --font-hand: var(--font-pacifico);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: var(--color-blush);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2.5px solid var(--color-rose-deep);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Paper grain. Applied to cards and the letter; keeps flat fills from
+   looking like a commercial template. */
+.paper-texture {
+  position: relative;
+  isolation: isolate;
+}
+
+.paper-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+}
+
+/* Soft watercolor wash used behind illustrations and headings. */
+.wash {
+  background-image: radial-gradient(
+    120% 120% at 30% 20%,
+    color-mix(in oklab, var(--color-blush) 92%, white) 0%,
+    color-mix(in oklab, var(--color-blush) 55%, white) 38%,
+    transparent 72%
+  );
+}
+
+.wash-sky {
+  background-image: radial-gradient(
+    120% 120% at 70% 15%,
+    color-mix(in oklab, var(--color-sky) 96%, white) 0%,
+    color-mix(in oklab, var(--color-sky) 60%, white) 42%,
+    transparent 74%
+  );
+}
+
+.wash-peach {
+  background-image: radial-gradient(
+    120% 120% at 50% 0%,
+    color-mix(in oklab, var(--color-peach) 92%, white) 0%,
+    color-mix(in oklab, var(--color-peach) 50%, white) 46%,
+    transparent 76%
+  );
+}
+
+/* Handwritten accent — Pacifico only, per the typography rule. */
+.hand {
+  font-family: var(--font-hand), "Segoe Script", cursive;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+.letter-body {
+  font-size: 1.0625rem;
+  line-height: 1.9;
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .letter-body {
+    font-size: 1.125rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

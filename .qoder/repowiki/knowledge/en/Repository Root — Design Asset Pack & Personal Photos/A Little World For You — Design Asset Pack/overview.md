@@ -1,0 +1,1 @@
+Design and content asset pack that defines the watercolor romantic apology website's visual system, six-chapter Vietnamese story, animation guidelines, and a Codex master prompt for implementation.

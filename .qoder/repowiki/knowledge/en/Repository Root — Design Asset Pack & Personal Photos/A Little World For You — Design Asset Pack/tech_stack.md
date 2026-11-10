@@ -1,0 +1,1 @@
+Reference material targets a Next.js App Router + React + TypeScript + Tailwind CSS + motion/react + Lucide React stack; the pack itself contains no source code.

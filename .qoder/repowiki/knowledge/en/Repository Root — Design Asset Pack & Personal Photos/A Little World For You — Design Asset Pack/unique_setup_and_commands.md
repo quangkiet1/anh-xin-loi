@@ -1,0 +1,1 @@
+Usage is manual: unzip the folder, open the target Next.js repository in Codex, place this folder in the workspace root, then copy the entire contents of `CODEX/MASTER-PROMPT.md` into the Codex chat. After implementation, replace placeholder images under `public/images/memories/` with real couple photos.
