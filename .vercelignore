@@ -1,0 +1,11 @@
+# Original photos live only on the owner's machine. The deployed site uses the
+# generated WebP files in public/images/memories/ instead.
+kỉ niệm/
+*.jpg
+*.jpeg
+
+# Design documentation pack — not part of the built site.
+A-Little-World-For-You-Design-Asset-Pack/
+
+# Local deployment scratch files.
+.vercel-tmp/
